@@ -1,9 +1,12 @@
-const { allCreatedResources } = require("./demo/Resource");
-const { treeData } = require("./demo/treeData");
-const { Bush } = require("./mongooseModels/BushModel");
-const { BushPosition } = require("./mongooseModels/BushPositionModel");
-const { Resource } = require("./mongooseModels/ResourceModel");
+const { allCreatedResources } = require("./Resource");
+const { treeData } = require("./treeData");
+const { Bush } = require("../mongooseModels/BushModel");
+const { BushPosition } = require("../mongooseModels/BushPositionModel");
+const { Resource } = require("../mongooseModels/ResourceModel");
+const { connectToDb } = require("../mongoose");
 
+
+connectToDb()
 
 async function storeDemoTree() {
     await Bush.clearCollection()
