@@ -6,17 +6,23 @@ const bodyParser = require('body-parser');
 const { Bush } = require('./mongooseModels/BushModel.js');
 const { Resource } = require('./mongooseModels/ResourceModel.js');
 const { standarDizeBushPositions } = require('./util/PositionLogic.js');
+const { storeDemoTree } = require('./demo/demoStorer.js');
+require('dotenv').config()
+
 
 const app = express()
 
-const portNum = 3001
+const portNum = process.env.PORT
+const ORIGIN = process.env.ORIGIN
+console.log('portNum: ', portNum)
 
 app.use(cors({
-    origin: `http://localhost:3000`
+    origin: ORIGIN
 }))
 
 
 connectToDb()
+// storeDemoTree()
 const jsonParser = bodyParser.json()
 
 

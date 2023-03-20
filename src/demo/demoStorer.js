@@ -6,7 +6,7 @@ const { Resource } = require("../mongooseModels/ResourceModel");
 const { connectToDb } = require("../mongoose");
 
 
-connectToDb()
+// connectToDb()
 
 async function storeDemoTree() {
     await Bush.clearCollection()
@@ -20,4 +20,8 @@ async function storeDemoTree() {
     await BushPosition.storeBushPositions(treeData.bushPositions)
 }
 
-storeDemoTree()
+// storeDemoTree()
+
+module.exports = {
+    storeDemoTree
+}
