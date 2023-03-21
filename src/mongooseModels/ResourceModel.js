@@ -23,7 +23,9 @@ const resourceSchema = new mongoose.Schema({
 
 resourceSchema.statics.storeResources = function (resources) {
 
-    this.deleteMany({})
+
+    try {
+        this.deleteMany({})
         .then(() => {
             for (let key of Object.keys(resources)) {
 
@@ -42,6 +44,10 @@ resourceSchema.statics.storeResources = function (resources) {
                 resource.save()
             }
         })
+    } catch (err) {
+        console.log(err)
+    }
+
 }
 
 
