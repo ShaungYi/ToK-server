@@ -63,4 +63,8 @@ node_modules/
 .yarn-integrity
 
 # dotenv environment variables file
+<<<<<<< HEAD
 .env
+=======
+# .env
+>>>>>>> new-branch

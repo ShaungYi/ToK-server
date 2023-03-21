@@ -46,26 +46,32 @@ bushSchema.statics.storeHierarchy = function (subHierarchy) {
 bushSchema.statics.getHierarchy = async function () {
 
     async function recursiveBushLoader(daId){
-        const bush = await Bush.findOne({id: daId})
 
-        const subHierarchy = {}
+        try {
+            const bush = await Bush.findOne({id: daId})
 
-        subHierarchy.name = bush.name
-        subHierarchy.id = bush.id
-        subHierarchy.resources = await Promise.all(
-            bush.resourceIds.map(async (resourceId) => {
-                const resource = await Resource.findOne({id: resourceId})
-                return resource
-            })
-        ) 
-        subHierarchy.children = await Promise.all(
-            bush.childrenIds.map(async (childId) => {
-                const childBush = await recursiveBushLoader(childId)
-                return childBush
-            })
-        ) 
+            const subHierarchy = {}
+    
+            subHierarchy.name = bush.name
+            subHierarchy.id = bush.id
+            subHierarchy.resources = await Promise.all(
+                bush.resourceIds.map(async (resourceId) => {
+                    const resource = await Resource.findOne({id: resourceId})
+                    return resource
+                })
+            ) 
+            subHierarchy.children = await Promise.all(
+                bush.childrenIds.map(async (childId) => {
+                    const childBush = await recursiveBushLoader(childId)
+                    return childBush
+                })
+            ) 
+    
+            return subHierarchy
+        } catch (err) {
+            console.log(err)
+        }
 
-        return subHierarchy
 
     }
 
